@@ -48,7 +48,7 @@ public class AppConfig {
     private CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of(frontendUrl));
+        configuration.setAllowedOriginPatterns(List.of(frontendUrl, "https://viva-bazar-ecommerce.vercel.app"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
