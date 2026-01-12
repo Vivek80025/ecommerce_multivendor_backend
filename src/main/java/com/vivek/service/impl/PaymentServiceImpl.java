@@ -38,6 +38,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Value("${razorpay.api.secret}")
     private String apiSecret;
 
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
 
     private final PaymentOrderRepository paymentOrderRepository;
     private final OrderRepository orderRepository;
@@ -147,7 +150,7 @@ public class PaymentServiceImpl implements PaymentService {
             paymentLinkRequest.put("reminder_enable",true);
 
             // Set the callback URL and method
-            paymentLinkRequest.put("callback_url","http://localhost:3000/payment-success/"+orderId);
+            paymentLinkRequest.put("callback_url",frontendUrl+"/payment-success/"+orderId);
             paymentLinkRequest.put("callback_method","get");
 
             PaymentLink payment = razorpay.paymentLink.create(paymentLinkRequest);

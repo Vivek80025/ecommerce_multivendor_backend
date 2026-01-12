@@ -1,18 +1,3 @@
-#FROM eclipse-temurin:21-jre-jammy
-#
-## Set the working directory inside the container
-#WORKDIR /app
-#
-## Copy the JAR file to the container
-#ARG JAR_FILE=target/*.jar
-#COPY ${JAR_FILE} app.jar
-#
-#EXPOSE 5454
-#
-## Run the Spring Boot app
-#ENTRYPOINT ["java", "-jar", "app.jar"]
-
-
 # ---------- Stage 1: Build the JAR ----------
 FROM eclipse-temurin:21-jdk-jammy AS build
 
@@ -40,10 +25,7 @@ COPY --from=build /app/target/*.jar app.jar
 # Expose your Spring Boot port
 EXPOSE 8080
 
-# Limit JVM memory for Render free tier
-ENV JAVA_OPTS="-Xmx400m"
-
 # Run Spring Boot app
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-Xmx400m","-jar","app.jar"]
 
 
